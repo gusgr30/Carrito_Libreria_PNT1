@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Carrito.Models.Autor">
+    <Position X="13.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAgAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Autor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carrito.Models.Carrito">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAEIAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Carrito.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Libros" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Carrito.Models.CarritoLibro">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAEAAAAAAAAAAAAEAAAAAAAAAEIAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CarritoLibro.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Carrito" />
+      <Property Name="Libro" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Carrito.Models.Domicilio">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgEAAAAAAAAAAAAAAAQAAAAAAAQEACIAAAA=</HashCode>
+      <FileName>Models\Domicilio.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Persona" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Carrito.Models.Email">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Email.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carrito.Models.Libro">
+    <Position X="9.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIAEAAAAEAAAAAAAAEARIQgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Libro.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Autor" />
+      <Property Name="CarritoLibro" />
+      <Property Name="Genero" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Valoraciones" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Carrito.Models.Persona">
+    <Position X="3.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAEAAAgAAAAAAAAAAAAAAAAiAAAAA=</HashCode>
+      <FileName>Models\Persona.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Domicilio" />
+      <Property Name="Email" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Telefono" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Carrito.Models.Telefono">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAEACABAAA=</HashCode>
+      <FileName>Models\Telefono.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Persona" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Carrito.Models.Usuario">
+    <Position X="3.5" Y="6.5" Width="1.5" />
+    <AssociationLine Name="Carrito" Type="Carrito.Models.Carrito" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="7.109" />
+        <Point X="8.062" Y="7.109" />
+        <Point X="8.062" Y="5.468" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAIAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Usuario.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Carrito" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Valoraciones" />
+      <Property Name="HistorialCompra" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Carrito.Models.Valoracion">
+    <Position X="7.25" Y="8.75" Width="1.5" />
+    <AssociationLine Name="Usuario" Type="Carrito.Models.Usuario" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="10.322" />
+        <Point X="3.75" Y="10.322" />
+        <Point X="3.75" Y="7.717" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAEAAAAAIAAAEAAAAAEACIAAAA=</HashCode>
+      <FileName>Models\Valoracion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Libro" />
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="Carrito.Models.Genero">
+    <Position X="13.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAUAAAAAAABgAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\Genero.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="8.83" />
+</ClassDiagram>
