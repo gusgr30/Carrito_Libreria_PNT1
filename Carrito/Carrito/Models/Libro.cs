@@ -22,9 +22,9 @@ namespace Carrito.Models
         {
             this.Stock += cantidad;
         }
-        public boolean hayStock()
+        public Boolean hayStock()
         {
-            return Stock > 0;
+            return this.Stock > 0;
         }
     }
 }

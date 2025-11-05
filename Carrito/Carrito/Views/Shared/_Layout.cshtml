@@ -1,49 +1,127 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Carrito</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Carrito.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Carrito</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+        <div class="logo"><img src="images/logo.png" alt="Logo Librería"> </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar libros, autores...">
+        </div>
+
+        <div class="user-actions">
+            <a href="#">Iniciar sesión</a>
+            <a href="#">Carrito</a>
+        </div>
+    </header>
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li class="dropdown">
+                <a href="#">CATEGORÍAS ▾</a>
+                <div class="dropdown-content">
+                    <ul>
+                        <!-- aca estan todas las categorias pero solo nombre, en un futuro cambiar a href y su respectiva pagina u otra solucion -->
+                        <li>LIT. UNIVERSAL</li>
+                        <li>LIT. LATINOAMERICANA</li>
+                        <li>LIT. ARGENTINA</li>
+                        <li>LIT. INFANTIL (0-3 AÑOS)</li>
+                        <li>LIT. INFANTIL (4-7 AÑOS)</li>
+                        <li>LIT. INFANTIL (8-11 AÑOS)</li>
+                        <li>LIT. JUVENIL</li>
+                        <li>ARTE Y ARQUITECTURA</li>
+                    </ul>
+                    <ul>
+                        <li>BIOGRAFÍAS</li>
+                        <li>CIENCIA FICCIÓN</li>
+                        <li>CINE</li>
+                        <li>COCINA</li>
+                        <li>DEPORTES</li>
+                        <li>ECONOMÍA Y EMPRESA</li>
+                        <li>EDUCACIÓN</li>
+                        <li>FILOSOFÍA</li>
+                    </ul>
+                    <ul>
+                        <li>HISTORIA</li>
+                        <li>HUMOR</li>
+                        <li>MÚSICA</li>
+                        <li>NOVELA HISTÓRICA</li>
+                        <li>POESÍA</li>
+                        <li>POLICIALES Y SUSPENSO</li>
+                        <li>POLÍTICA</li>
+                        <li>PSICOLOGÍA</li>
+                    </ul>
+                    <ul>
+                        <li>ROMANCE</li>
+                        <li>SALUD</li>
+                        <li>SOCIOLOGÍA</li>
+                        <li>TEATRO</li>
+                        <li>TERROR</li>
                     </ul>
                 </div>
+            </li>
+            <li><a href="#">LOS MÁS VENDIDOS</a></li>
+            <li><a href="#">NOVEDADES</a></li>
+            <li><a href="#">CENTRO DE AYUDA</a></li>
+            <li><a href="#">SUCURSALES</a></li>
+        </ul>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-column">
+                <h4>Libreria</h4>
+                <a href="#">Locales</a>
+                <a href="#">Políticas de privacidad</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            <div class="footer-column">
+                <h4>GUÍA DE COMPRA</h4>
+                <a href="#">Preguntas frecuentes</a>
+                <a href="#">Promociones para las sucursales</a>
+                <a href="#">Costos y tiempos de envío</a>
+                <a href="#">Devoluciones</a>
+                <a href="#"><strong>Cancelaciones</strong></a>
+            </div>
+            <div class="footer-column">
+                <h4>PRODUCTOS</h4>
+                <a href="#">Libros por tema</a>
+            </div>
+            <div class="footer-column">
+                <h4>CONTACTANOS</h4>
+                <a href="#">Trabajar con nosotros</a>
+                <a href="#">Consultas</a>
+            </div>
+            <div class="footer-column">
+                <h4>REDES SOCIALES</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="icons/instagram.svg" alt="Instagram" /></a>
+                    <a href="#"><img src="icons/twitter.svg" alt="Twitter" /></a>
+                    <a href="#"><img src="icons/facebook.svg" alt="Facebook" /></a>
+                    <a href="#"><img src="icons/linkedin.svg" alt="LinkedIn" /></a>
+                </div>
+            </div>
+        </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Carrito - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="footer-bottom">
+            <p>
+                © 2025 Libreria S.A. Todos los derechos reservados.<br>
+                CALLE FALSA 123 CABA – CUIT Nº: 30-11111111-0
+            </p>
+            <div class="payment-methods">
+                <img src="images/visa.png" alt="Visa" />
+                <img src="images/mastercard.png" alt="Mastercard" />
+                <img src="images/amex.png" alt="Amex" />
+                <img src="images/rapipago.png" alt="Rapipago" />
+                <img src="images/pago-facil.png" alt="Pago Fácil" />
+                <img src="images/mercado-pago.png" alt="Mercado Pago" />
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
