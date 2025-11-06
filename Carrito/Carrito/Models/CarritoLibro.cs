@@ -6,8 +6,10 @@ namespace Carrito.Models
 {
     public class CarritoLibro
     {
+        
         [Key]
         public int CarritoId { get; set; }
+        
         [Key]
         public int LibroId { get; set; }
 

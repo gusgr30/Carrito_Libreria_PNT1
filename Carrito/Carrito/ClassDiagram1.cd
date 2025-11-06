@@ -9,16 +9,27 @@
   </Class>
   <Class Name="Carrito.Models.Carrito">
     <Position X="6.75" Y="4" Width="1.5" />
+    <AssociationLine Name="Usuario" Type="Carrito.Models.Usuario" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="4.875" />
+        <Point X="6.375" Y="4.875" />
+        <Point X="6.375" Y="6.625" />
+        <Point X="5" Y="6.625" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAEIAAAAEAAAAAAA=</HashCode>
       <FileName>Models\Carrito.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Usuario" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Libros" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Carrito.Models.CarritoLibro">
-    <Position X="9.75" Y="4" Width="1.5" />
+    <Position X="10" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAEAAAAAAAAAAAAEAAAAAAAAAEIAAAAAAAAAAAA=</HashCode>
       <FileName>Models\CarritoLibro.cs</FileName>
@@ -31,7 +42,7 @@
   <Class Name="Carrito.Models.Domicilio">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAgEAAAAAAAAAAAAAAAQAAAAAAAQEACIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgEAAAAAAAAAAAAAAARAAAAAAAQEACIAAAA=</HashCode>
       <FileName>Models\Domicilio.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -39,7 +50,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Carrito.Models.Email">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Email.cs</FileName>
@@ -53,8 +64,8 @@
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Autor" />
-      <Property Name="CarritoLibro" />
       <Property Name="Genero" />
+      <Property Name="CarritoLibro" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Valoraciones" />
@@ -62,13 +73,27 @@
   </Class>
   <Class Name="Carrito.Models.Persona">
     <Position X="3.5" Y="3.75" Width="1.5" />
+    <AssociationLine Name="Email" Type="Carrito.Models.Email" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="4.75" />
+        <Point X="1.25" Y="4.75" />
+        <Point X="1.25" Y="5.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Telefono" Type="Carrito.Models.Telefono" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="4.375" />
+        <Point X="1.562" Y="4.375" />
+        <Point X="1.562" Y="3.718" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAEAAAgAAAAAAAAAAAAAAAAiAAAAA=</HashCode>
       <FileName>Models\Persona.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Domicilio" />
       <Property Name="Email" />
+      <Property Name="Domicilio" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Telefono" />
@@ -88,10 +113,23 @@
     <Position X="3.5" Y="6.5" Width="1.5" />
     <AssociationLine Name="Carrito" Type="Carrito.Models.Carrito" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="5" Y="7.109" />
-        <Point X="8.062" Y="7.109" />
-        <Point X="8.062" Y="5.468" />
+        <Point X="5" Y="7.438" />
+        <Point X="8.062" Y="7.438" />
+        <Point X="8.062" Y="5.279" />
       </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.739" Y="0.268" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="HistorialCompra" Type="Carrito.Models.Carrito" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="6.938" />
+        <Point X="7.406" Y="6.938" />
+        <Point X="7.406" Y="5.279" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.411" Y="0.83" />
+      </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>EAAIAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAA=</HashCode>
@@ -119,8 +157,8 @@
       <FileName>Models\Valoracion.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Libro" />
       <Property Name="Usuario" />
+      <Property Name="Libro" />
     </ShowAsAssociation>
   </Class>
   <Enum Name="Carrito.Models.Genero">
