@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Carrito.Models
+namespace Carrito.Models;
+
+public partial class Libro
 {
-    public class Libro
-    {
-        public int LibroId { get; set; }
-        public Autor Autor { get; set; }
-        public float Precio { get; set; }
-        public int Stock { get; set; }
-        public Genero Genero { get; set; }
-        public List<Valoracion> Valoraciones { get; set; }
-        public CarritoLibro CarritoLibro { get; set; }
+    public int Id { get; set; }
 
-        public void disminuirStock(int cantidad)
-        {
-            actualizarStock(-cantidad);
-        }
-        public void actualizarStock(int cantidad)
-        {
-            this.Stock += cantidad;
-        }
-        public Boolean hayStock()
-        {
-            return this.Stock > 0;
-        }
-    }
+    public string Title { get; set; } = null!;
+
+    public int GenreId { get; set; }
+
+    public int AuthorId { get; set; }
+
+    public int? PublisherId { get; set; }
+
+    public int? PublishedYear { get; set; }
+
+    public int? Pages { get; set; }
+
+    public string? CoverUrl { get; set; }
+
+    public string SynopsisEs { get; set; } = null!;
+
+    public virtual Autor Author { get; set; } = null!;
+
+    public virtual Genero Genre { get; set; } = null!;
+
+    public virtual Editorial? Publisher { get; set; }
 }

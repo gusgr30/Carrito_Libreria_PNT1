@@ -1,12 +1,13 @@
-﻿namespace Carrito.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace Carrito.Models;
+
+public partial class Genero
 {
-    public enum Genero
-    {
-        TERROR,
-        SUSPENSO,
-        NOVELA,
-        DRAMA,
-        POLICIAL,
-        ROMANCE
-    }
+    public int Id { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<Libro> Libros { get; set; } = new List<Libro>();
 }
