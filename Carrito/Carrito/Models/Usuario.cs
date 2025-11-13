@@ -9,7 +9,6 @@ namespace Carrito.Models
         [Key]
         public int UsuarioId { get; set; }
         public Carrito Carrito { get; set; }
-        public List<Valoracion> Valoraciones { get; set; }
         public List<Carrito> HistorialCompra { get; set; }
 
         //public void iniciarSesion()

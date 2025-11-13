@@ -11,8 +11,8 @@ namespace Carrito.Models
 
         [Required(ErrorMessage = "Se debe ingresar un nombre")]
         public string Nombre { get; set; }
-        public Email Email { get; set; }
-        public List<Telefono> Telefono { get; set; }
+        public string Email { get; set; }
+        public string Telefono { get; set; }
         public Domicilio Domicilio { get; set; }
 
     }

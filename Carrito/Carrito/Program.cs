@@ -1,3 +1,5 @@
+﻿using Carrito.Models;
+
 namespace Carrito
 {
     public class Program
@@ -31,6 +33,7 @@ namespace Carrito
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+            
         }
     }
 }

@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Librería Digital";
+﻿@using Microsoft.EntityFrameworkCore
+@{
+    ViewData["Title"] = "Librería Digital"; 
+
 }
 
-<div class="text-center">
-    <h1>Este es el index</h1>
+<h1>Libros</h1>
+<main>
+    @{
+        using (var context = new AppDbContext())
+        {
+            var libros = context.Libros
+                .Include(l => l.Author)
+                .Include(l => l.Genre)
+                .Include(l => l.Publisher)
+                .ToList();
 
-</div>
+           @foreach (var libro in libros)
+           {
+                <div class="card">
+                    <img src="@libro.CoverUrl" alt="@libro.Title">
+                    <h2>@libro.Title</h2>
+                    <p>@libro.Author.FullName</p>
+                    <p>$25.000.-</p>
+                    <button>Comprar</button>
+                </div>
+           }
+        }
+    }
+
+</main>
