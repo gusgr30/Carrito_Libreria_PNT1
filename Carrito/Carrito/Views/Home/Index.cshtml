@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.EntityFrameworkCore
+@{
+    ViewData["Title"] = "Librería Digital"; 
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Libros</h1>
+<main>
+    @{
+        using (var context = new AppDbContext())
+        {
+            var libros = context.Libros
+                .Include(l => l.Author)
+                .Include(l => l.Genre)
+                .Include(l => l.Publisher)
+                .ToList();
+
+           @foreach (var libro in libros)
+           {
+                <div class="card">
+                    <img src="@libro.CoverUrl" alt="@libro.Title">
+                    <h2>@libro.Title</h2>
+                    <p>@libro.Author.FullName</p>
+                    <p>$25.000.-</p>
+                    <button>Comprar</button>
+                </div>
+           }
+        }
+    }
+
+</main>

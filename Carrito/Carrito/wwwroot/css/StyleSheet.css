@@ -1,0 +1,188 @@
+﻿
+html, body {
+height: 100%;
+margin: 0;
+display: flex;
+flex-direction: column;
+font-family: Arial, sans-serif;
+}
+
+header {
+background-color: #ffb303;
+color: white;
+padding: 5px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.logo {
+display: flex;
+align-items: center;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
+}
+
+.search-bar {
+flex-grow: 1;
+margin: 0 45px;
+display: flex;
+justify-content: center;
+}
+
+.search-bar input {
+    width: 50%;
+    padding: 15px;
+    border: 0;
+    border-radius: 4px;
+}
+
+.user-actions {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+
+.user-actions a {
+    color: white;
+    text-decoration: none;
+    align-items: center;
+    font-weight: bold;
+    display: flex;
+    gap: 5px;
+}
+
+    .user-actions a:hover {
+        text-decoration: underline;
+    }
+
+/* Barra de cat, +vend, nov, etc.. */
+.navbar {
+background-color: white;
+border-bottom: 1px solid #ccc;
+padding: 10px 20px;
+}
+
+.nav-menu {
+list-style: none;
+display: flex;
+gap: 30px;
+align-items: center;
+margin: 0 auto; /* el auto... */
+justify-content: center; /*... y center necesarios para que este centrado */
+padding: 0;
+font-weight: bold;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #ffb303;
+}
+
+.nav-menu li a:hover {
+    text-decoration: underline;
+}
+
+/* Menu oculto de categoria */
+.dropdown-content {
+display: flex;
+opacity: 0;
+pointer-events: none;
+transform: translateY(10px);
+transition: opacity 0.2s ease, transform 0.2s ease;
+position: absolute;
+top: 100%;
+left: 0;
+background-color: white;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+padding: 20px;
+z-index: 10;
+white-space: nowrap;
+gap: 40px;
+}
+
+
+.dropdown:hover .dropdown-content {
+opacity: 1;
+pointer-events: auto;
+transform: translateY(0);
+}
+
+
+.dropdown-content ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.dropdown-content ul li {
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.footer {
+background: #eee;
+color: #333;
+font-family: Arial, sans-serif;
+font-size: 14px;
+margin-top: 2rem;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.footer-top {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+padding: 40px 60px;
+background-color: #eee;
+}
+
+.footer-column {
+min-width: 160px;
+max-width: 220px;
+margin-bottom: 20px;
+}
+
+.footer-column h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.social-icons a img {
+width: 24px;
+margin-right: 10px;
+}
+
+.footer-bottom {
+background-color: #ddd;
+padding: 20px 60px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.footer-bottom p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.payment-methods img {
+height: 30px;
+margin-left: 10px;
+}
