@@ -1,4 +1,5 @@
 ﻿using Carrito.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carrito
 {
@@ -10,6 +11,13 @@ namespace Carrito
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // -----------------------------------------
+            // 🔥 AGREGADO: Registrar el DbContext con tu cadena correcta
+            // -----------------------------------------
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            // -----------------------------------------
 
             var app = builder.Build();
 
