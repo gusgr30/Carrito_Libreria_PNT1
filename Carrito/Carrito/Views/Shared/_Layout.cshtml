@@ -1,4 +1,6 @@
-﻿ <!DOCTYPE html>
+﻿@using Microsoft.EntityFrameworkCore
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -24,44 +26,26 @@
             <li class="dropdown">
                 <a href="#">CATEGORÍAS ▾</a>
                 <div class="dropdown-content">
-                    <ul>
-                        <!-- aca estan todas las categorias pero solo nombre, en un futuro cambiar a href y su respectiva pagina u otra solucion -->
-                        <li>LIT. UNIVERSAL</li>
-                        <li>LIT. LATINOAMERICANA</li>
-                        <li>LIT. ARGENTINA</li>
-                        <li>LIT. INFANTIL (0-3 AÑOS)</li>
-                        <li>LIT. INFANTIL (4-7 AÑOS)</li>
-                        <li>LIT. INFANTIL (8-11 AÑOS)</li>
-                        <li>LIT. JUVENIL</li>
-                        <li>ARTE Y ARQUITECTURA</li>
-                    </ul>
-                    <ul>
-                        <li>BIOGRAFÍAS</li>
-                        <li>CIENCIA FICCIÓN</li>
-                        <li>CINE</li>
-                        <li>COCINA</li>
-                        <li>DEPORTES</li>
-                        <li>ECONOMÍA Y EMPRESA</li>
-                        <li>EDUCACIÓN</li>
-                        <li>FILOSOFÍA</li>
-                    </ul>
-                    <ul>
-                        <li>HISTORIA</li>
-                        <li>HUMOR</li>
-                        <li>MÚSICA</li>
-                        <li>NOVELA HISTÓRICA</li>
-                        <li>POESÍA</li>
-                        <li>POLICIALES Y SUSPENSO</li>
-                        <li>POLÍTICA</li>
-                        <li>PSICOLOGÍA</li>
-                    </ul>
-                    <ul>
-                        <li>ROMANCE</li>
-                        <li>SALUD</li>
-                        <li>SOCIOLOGÍA</li>
-                        <li>TEATRO</li>
-                        <li>TERROR</li>
-                    </ul>
+                    @{
+                        using (var context = new AppDbContext())
+                        {
+                            var genero = context.Generos
+                            .Include(g => g.Libros)                         
+                            .ToList();
+                            <ul>
+                                @for(int i = 0; i < genero.Count()/2; i++)
+                                {
+                                    <li>@genero[i].Name</li>
+                                }
+                            </ul>
+                            <ul>
+                                @for (int i = genero.Count() / 2; i < genero.Count(); i++)
+                                {
+                                    <li>@genero[i].Name</li>
+                                }
+                            </ul>
+                        }
+                    }
                 </div>
             </li>
             <li><a href="#">LOS MÁS VENDIDOS</a></li>
@@ -70,9 +54,7 @@
             <li><a href="#">SUCURSALES</a></li>
         </ul>
     </nav>
-    <main>
         @RenderBody()
-    </main>
     <footer class="footer">
         <div class="footer-top">
             <div class="footer-column">
