@@ -1,0 +1,27 @@
+﻿@using Carrito.Models
+@model IEnumerable<Libro>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Resultados de la búsqueda</h2>
+
+<div class="cards-container">
+
+    @foreach (var libro in Model)
+    {
+        <div class="card">
+            <img src="@libro.CoverUrl" alt="@libro.Title" />
+
+            <h2>@libro.Title</h2>
+
+            <p>@libro.Author?.FullName</p>
+
+            <p>$25.000.-</p>
+
+            <button>Comprar</button>
+        </div>
+    }
+
+</div>

@@ -15,22 +15,30 @@ namespace Carrito.Controllers
 
         public IActionResult Index()
         {
-            var lista = _context.Libros.ToList();
+            var lista = _context.Libros
+                .Include(l => l.Author)
+                .Include(l => l.Genre)
+                .Include(l => l.Publisher)
+                .ToList();
+
             return View(lista);
         }
 
         public IActionResult Buscar(string titulo)
         {
-            if (string.IsNullOrWhiteSpace(titulo))
+            var query = _context.Libros
+                .Include(l => l.Author)
+                .Include(l => l.Genre)
+                .Include(l => l.Publisher)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(titulo))
             {
-                return View("Index", _context.Libros.ToList());
+                query = query.Where(l => l.Title.Contains(titulo));
             }
 
-            var filtrados = _context.Libros
-                .Where(l => l.Title.Contains(titulo))
-                .ToList();
-
-            return View("Index", filtrados);
+            return View("Buscar", query.ToList());
         }
+
     }
 }

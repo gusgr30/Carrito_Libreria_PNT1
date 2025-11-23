@@ -13,7 +13,7 @@ namespace Carrito
             builder.Services.AddControllersWithViews();
 
             // -----------------------------------------
-            // 🔥 AGREGADO: Registrar el DbContext con tu cadena correcta
+            // AGREGADO: Registrar el DbContext con tu cadena correcta
             // -----------------------------------------
             builder.Services.AddDbContext<AppDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
