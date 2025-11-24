@@ -1,5 +1,6 @@
 ﻿@using Microsoft.EntityFrameworkCore
 @using Carrito.Data;
+@using Carrito.Models
 
 <!DOCTYPE html>
 <html lang="es">
@@ -43,16 +44,40 @@
                 </form>
             }
         }
+                     @*SECCIÓN USUARIO LOGUEADO*@
+        @{
+            int? usuarioId = Context.Session.GetInt32("UsuarioId");
+            Usuario usuarioLogueado = null;
+
+            if (usuarioId != null)
+            {
+                using (var context = new AppDbContext())
+                {
+                    usuarioLogueado = context.Usuarios
+                    .FirstOrDefault(u => u.PersonaId == usuarioId);
+                }
+            }
+        }
+
 
         <div class="user-actions">
-            <a href="#">Iniciar sesión</a>
-            <a asp-controller="Carrito"
-               asp-action="Index">
-                Carrito
-            </a>
-        </div>
-    </header>
+            @if (usuarioLogueado == null)
+            {
+                <a asp-controller="Cuenta" asp-action="Login">Iniciar sesión</a>
+                <a asp-controller="Cuenta" asp-action="Registro">Registrarse</a>
+            }
+            else
+            {
+                <span class="bienvenida">¡Hola, @usuarioLogueado.Nombre!</span>
+                <a asp-controller="Cuenta" asp-action="Logout">Cerrar sesión</a>
+            }
 
+            <a asp-controller="Carrito" asp-action="Index">Carrito</a>
+        </div>
+
+
+    </header>
+                            @*MENU NAV*@
     <nav class="navbar">
         <ul class="nav-menu">
             <li class="dropdown">
@@ -97,6 +122,8 @@
         </ul>
     </nav>
         @RenderBody()
+    @RenderSection("Scripts", required: false)
+
     <footer class="footer">
         <div class="footer-top">
             <div class="footer-column">
