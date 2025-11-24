@@ -19,6 +19,8 @@ public partial class Libro
 
     public int? Pages { get; set; }
 
+    public int? Price { get; set; }
+
     public string? CoverUrl { get; set; }
 
     public string SynopsisEs { get; set; } = null!;

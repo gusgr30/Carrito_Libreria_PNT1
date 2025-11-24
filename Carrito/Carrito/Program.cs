@@ -1,4 +1,5 @@
-﻿using Carrito.Models;
+﻿using Carrito.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carrito
 {
@@ -10,6 +11,16 @@ namespace Carrito
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // La sesión dura 30 mins
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
@@ -21,6 +32,7 @@ namespace Carrito
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -28,6 +40,7 @@ namespace Carrito
 
             app.UseAuthorization();
 
+            app.UseSession(); // <--- Que esté esto antes de las rutas
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
