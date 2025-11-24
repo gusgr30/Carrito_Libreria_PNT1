@@ -6,9 +6,9 @@ namespace Carrito.Controllers
 {
     public class LibroController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly Data.AppDbContext _context;
 
-        public LibroController(AppDbContext context)
+        public LibroController(Data.AppDbContext context)
         {
             _context = context;
         }
@@ -38,6 +38,18 @@ namespace Carrito.Controllers
             }
 
             return View("Buscar", query.ToList());
+        }
+
+        public IActionResult PorGenero(int id)
+        {
+            var libros = _context.Libros
+                .Where(l => l.GenreId == id)
+                .Include(l => l.Author)
+                .Include(l => l.Genre)
+                .Include(l => l.Publisher)
+                .ToList();
+
+            return View("Buscar", libros);  // reutilizamos la vista Buscar
         }
 
     }

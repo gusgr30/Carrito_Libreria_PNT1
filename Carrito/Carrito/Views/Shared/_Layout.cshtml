@@ -67,13 +67,23 @@
                             <ul>
                                 @for(int i = 0; i < genero.Count()/2; i++)
                                 {
-                                    <li>@genero[i].Name</li>
+                                    <li>
+                                        <a href="/Libro/PorGenero?id=@genero[i].Id">
+                                            @genero[i].Name
+                                        </a>
+                                    </li>
+
                                 }
                             </ul>
                             <ul>
                                 @for (int i = genero.Count() / 2; i < genero.Count(); i++)
                                 {
-                                    <li>@genero[i].Name</li>
+                                    <li>
+                                        <a href="/Libro/PorGenero?id=@genero[i].Id">
+                                            @genero[i].Name
+                                        </a>
+                                    </li>
+
                                 }
                             </ul>
                         }

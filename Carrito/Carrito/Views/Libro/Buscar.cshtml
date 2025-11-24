@@ -18,9 +18,15 @@
 
             <p>@libro.Author?.FullName</p>
 
-            <p>$25.000.-</p>
+            <p>$@libro.Price.-</p>
 
-            <button>Comprar</button>
+            <a asp-controller="Carrito"
+               asp-action="Agregar"
+               asp-route-id="@libro.Id"
+               class="btn btn-warning">
+                Comprar
+            </a>
+
         </div>
     }
 
