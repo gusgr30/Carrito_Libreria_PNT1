@@ -6,16 +6,43 @@
 <head>
     <meta charset="UTF-8">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="css/StyleSheet.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
 </head>
 <body>
+    @using Carrito.Models
     <header>
         <div class="logo"><img src="images/logo.png" alt="Logo Librería"> </div>
 
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar libros, autores...">
-        </div>
+        @* BUSCADOR PRINCIPAL CON AUTOCOMPLETADO *@
+        @{
+            using (var context = new AppDbContext())
+            {
+                var titulos = context.Libros
+                .OrderBy(l => l.Title)
+                .Select(l => l.Title)
+                .ToList();
+
+                <form asp-controller="Libro"
+                      asp-action="Buscar"
+                      method="get"
+                      class="search-bar">
+                    <input type="text"
+                           name="titulo"
+                           list="listaLibrosHeader"
+                           placeholder="Buscar libros, autores..." />
+
+                    <datalist id="listaLibrosHeader">
+                        @foreach (var t in titulos)
+                        {
+                            <option value="@t"></option>
+                        }
+                    </datalist>
+                </form>
+            }
+        }
 
         <div class="user-actions">
             <a href="#">Iniciar sesión</a>
@@ -25,6 +52,7 @@
             </a>
         </div>
     </header>
+
     <nav class="navbar">
         <ul class="nav-menu">
             <li class="dropdown">
