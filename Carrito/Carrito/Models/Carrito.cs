@@ -10,8 +10,10 @@ namespace Carrito.Models
         public int CarritoId { get; set; }
 
         public Usuario Usuario { get; set; }
-        public int UsuarioId { get; set; }
-        public List<CarritoLibro> Libros { get; set; } 
+        public int PersonaId { get; set; }
+        public List<CarritoLibro> Libros { get; set; }
+
+        public bool Activo { get; set; } = true;
 
     }
 }

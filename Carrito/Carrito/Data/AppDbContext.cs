@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Carrito.Models;
 
-namespace Carrito.Models;
+namespace Carrito.Data;
 
 public partial class AppDbContext : DbContext
 {
@@ -23,8 +24,12 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Libro> Libros { get; set; }
 
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Carrito.Models.Carrito> Carritos { get; set; }
+
+    public DbSet<CarritoLibro> CarritoLibros { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=GUS-PC\\MSSQLSERVERINSTA;Database=ClubLibros;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -92,6 +97,11 @@ public partial class AppDbContext : DbContext
                 .HasForeignKey(d => d.PublisherId)
                 .HasConstraintName("FK_Books_Publishers");
         });
+
+        modelBuilder.Entity<CarritoLibro>()
+         .HasKey(cl => new { cl.CarritoId, cl.LibroId });
+
+        base.OnModelCreating(modelBuilder);
 
         OnModelCreatingPartial(modelBuilder);
     }

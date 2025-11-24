@@ -1,18 +1,20 @@
-﻿main {
+﻿.titulo{
+   margin-left: 5rem;
+}
+.galeria {
     margin: 2rem auto;
     justify-content: center;
     width: 100%;
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
-    column-gap: auto;
 }
 
-main a {
+.galeria a {
     text-decoration: none;
     color: black;
 }
 
-main .card {
+.galeria .card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
@@ -22,21 +24,27 @@ main .card {
     width: 15rem;
 }
 
-main .card img {
+.galeria .card img {
     max-width: 100%;
     height: 15rem;
     border-radius: 4px;
 }
 
-main .card h2 {
+.galeria .card h2 {
     font-size: 1.2rem;
 }
 
-main .card button {
+.galeria .card a {
     background-color: #ffb303;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
+}
+main .pagination-lg{
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
