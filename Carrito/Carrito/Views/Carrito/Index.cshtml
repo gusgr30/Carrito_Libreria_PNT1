@@ -36,6 +36,13 @@
                         <td>@item.Cantidad</td>
                         <td>$@item.Libro.Price</td>
                         <td>$@(item.Libro.Price* item.Cantidad)</td>
+                        <td>
+                            <a asp-controller="Carrito" 
+                                asp-action="Eliminar"
+                                asp-route-id=@item.Libro.Id>
+                                🗑️
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

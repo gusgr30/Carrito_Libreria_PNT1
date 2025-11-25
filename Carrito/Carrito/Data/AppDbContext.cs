@@ -31,12 +31,12 @@ public partial class AppDbContext : DbContext
     public DbSet<CarritoLibro> CarritoLibros { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-       => optionsBuilder.UseSqlServer("Server=GUS-PC\\MSSQLSERVERINSTA;Database=ClubLibros;Trusted_Connection=True;TrustServerCertificate=True");
+       //=> optionsBuilder.UseSqlServer("Server=GUS-PC\\MSSQLSERVERINSTA;Database=ClubLibros;Trusted_Connection=True;TrustServerCertificate=True");
        //=> optionsBuilder.UseSqlServer("Server=DESKTOP-2BU8S5T;Database=ClubLibros;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-                modelBuilder.Entity<Persona>()
+        modelBuilder.Entity<Persona>()
             .HasDiscriminator<string>("TipoPersona")
             .HasValue<Persona>("Persona")
             .HasValue<Usuario>("Usuario");
