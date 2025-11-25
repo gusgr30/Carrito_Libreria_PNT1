@@ -15,6 +15,8 @@ public partial class AppDbContext : DbContext
         : base(options)
     {
     }
+    public DbSet<Persona> Personas { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
 
     public virtual DbSet<Autor> Autors { get; set; }
 
@@ -24,7 +26,6 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Libro> Libros { get; set; }
 
-    public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Carrito.Models.Carrito> Carritos { get; set; }
 
     public DbSet<CarritoLibro> CarritoLibros { get; set; }
@@ -35,6 +36,11 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+                modelBuilder.Entity<Persona>()
+            .HasDiscriminator<string>("TipoPersona")
+            .HasValue<Persona>("Persona")
+            .HasValue<Usuario>("Usuario");
+
         modelBuilder.Entity<Autor>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Authors__3214EC0741AF68BB");

@@ -19,11 +19,8 @@ namespace Carrito
                 options.Cookie.IsEssential = true;
             });
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
             // -----------------------------------------
-            // AGREGADO: Registrar el DbContext con tu cadena correcta
+            // Registrar el DbContext con tu cadena correcta
             // -----------------------------------------
             builder.Services.AddDbContext<AppDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

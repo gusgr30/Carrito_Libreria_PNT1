@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Carrito.Models
 {
-    [NotMapped]
     public class Persona
     {
         [Key]
@@ -13,9 +12,11 @@ namespace Carrito.Models
 
         [Required(ErrorMessage = "Se debe ingresar un nombre")]
         public string Nombre { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Telefono { get; set; }
-        public Domicilio Domicilio { get; set; }
 
+        public Domicilio Domicilio { get; set; }
     }
 }

@@ -6,12 +6,12 @@ namespace Carrito.Models
 {
     public class Usuario : Persona
     {
-        [Key]
-        public int UsuarioId { get; set; }
+        [Required]
+        public string PasswordHash { get; set; }
+
+        public int? CarritoId { get; set; }
+
         public Carrito Carrito { get; set; }
         public List<Carrito> HistorialCompra { get; set; }
-
-        //public void iniciarSesion()
-        //public void finalizarCompra()
     }
 }
