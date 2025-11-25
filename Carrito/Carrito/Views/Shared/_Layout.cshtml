@@ -121,6 +121,14 @@
             <li><a href="#">SUCURSALES</a></li>
         </ul>
     </nav>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p>
+                    @TempData["Error"]
+                </p>
+            </div>
+        }
         @RenderBody()
     @RenderSection("Scripts", required: false)
 

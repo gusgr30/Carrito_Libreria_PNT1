@@ -70,7 +70,8 @@ namespace Carrito.Controllers
                 resultado = RedirectToAction("Index", "Home");
             } catch (Exception)
             {
-                resultado = RedirectToAction("Registro", "Cuenta");
+                TempData["Error"] = "Debes iniciar sesión o registrarte para agregar libros al carrito.";
+                resultado = RedirectToAction("Login", "Cuenta");
             }
 
 
@@ -80,10 +81,19 @@ namespace Carrito.Controllers
         // Ver qué hay en el carrito
         public IActionResult Index()
         {
-            var usuario = traerUsuario();
-            var listaVisual = usuario.Carrito.Libros;
+            IActionResult resultado;
+            try
+            {
+                var usuario = traerUsuario();
+                var listaVisual = usuario.Carrito.Libros;
+                resultado = View(listaVisual);
+            } catch (Exception)
+            {
+                TempData["Error"] = "Debes iniciar sesión o registrarte para tener un carrito.";
+                resultado = RedirectToAction("Login", "Cuenta");
+            }
 
-            return View(listaVisual);
+            return resultado;
         }
         public IActionResult CompraExitosa()
         {
@@ -105,12 +115,17 @@ namespace Carrito.Controllers
             }
             _context.SaveChanges();
 
-                return RedirectToAction("Index", "Carrito");
+            return RedirectToAction("Index", "Carrito");
         }
 
         private Usuario traerUsuario()
         {
             int? idUsuarioSession = HttpContext.Session.GetInt32("UsuarioId");
+            if(idUsuarioSession == null)
+            {
+                throw new NullReferenceException();
+            }
+
             var usuario = _context.Personas
                 .OfType<Usuario>()
                 .Include(u => u.Carrito)
