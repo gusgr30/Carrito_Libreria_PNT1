@@ -16,7 +16,5 @@ namespace Carrito.Models
         public Carrito Carrito {  get; set; }
         public Libro Libro { get; set; }
         public int Cantidad { get; set; }
-
-
     }
 }

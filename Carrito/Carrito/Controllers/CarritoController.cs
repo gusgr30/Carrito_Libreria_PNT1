@@ -1,6 +1,8 @@
 ﻿using Carrito.Data;
 using Carrito.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text.Json; // Necesario para guardar la lista en la sesión
 
 namespace Carrito.Controllers
@@ -14,45 +16,103 @@ namespace Carrito.Controllers
             _context = context;
         }
 
-        // ACCIÓN 1: Agregar un libro al carrito
-        public IActionResult Agregar(int id)
+        //// ACCIÓN 1: Agregar un libro al carrito
+        public IActionResult Agregar(int libroId)
         {
-            // 1. Intentamos leer lo que ya hay en la memoria (Sesión)
-            var carritoSession = HttpContext.Session.GetString("CarritoTemporal");
-            List<ItemCarritoTemporal> items;
+            //creo el resultado del metodo para manejo de excepciones
+            IActionResult resultado;
 
-            // 2. Si está vacío o es nulo, creamos una lista nueva
-            if (string.IsNullOrEmpty(carritoSession))
+            //Busco al usuario y traigo su carrito con los libros que tiene
+            var usuario = _context.Personas
+                .OfType<Usuario>()
+                .Include(u => u.Carrito)
+                .ThenInclude(c => c.Libros)
+                .FirstOrDefault(u => u.Email == User.Identity.Name);
+            try
             {
-                items = new List<ItemCarritoTemporal>();
-            }
-            else
+                if(usuario.Carrito == null)
+                {
+                    // Crear carrito asociado
+                    var nuevoCarrito = new Carrito.Models.Carrito
+                    {
+                        PersonaId = usuario.PersonaId,
+                        Activo = true
+                    };
+                    usuario.Carrito = nuevoCarrito;
+                    _context.Carritos.Add(nuevoCarrito);
+
+                    _context.SaveChanges();
+                }
+                //Pregunto si el libro agregado esta en el carrito
+                var libroExistente = usuario.Carrito.Libros
+                    .FirstOrDefault(x => x.LibroId == libroId);
+
+                //Si existe en el carrito, se aumenta la cantidad -- libroExistente refiere a CarritoLibro
+                //Si no existe se crea un nuevo CarritoLibro y se lo agrega a Libros (refiere a una List<CarritoLibro>)
+                if (libroExistente != null)
+                {
+                    libroExistente.Cantidad++;
+                }
+                else
+                {
+                    var libroAgregar = new CarritoLibro
+                    {
+                        LibroId = libroId,
+                        Cantidad = 1
+                    };
+
+                    usuario.Carrito.Libros.Add(libroAgregar);
+                }
+
+                _context.SaveChanges();
+                resultado = RedirectToAction("Index", "Home");
+            }catch (NullReferenceException)
             {
-                // Si ya había algo, lo convertimos de texto a Lista de C#
-                items = JsonSerializer.Deserialize<List<ItemCarritoTemporal>>(carritoSession);
+                resultado = RedirectToAction("Registro", "Cuenta");
             }
 
-            // 3. Buscamos si el libro ya estaba en la lista
-            var itemExistente = items.FirstOrDefault(x => x.LibroId == id);
 
-            if (itemExistente != null)
-            {
-                // Si ya existe, solo sumamos cantidad
-                itemExistente.Cantidad++;
-            }
-            else
-            {
-                // Si es nuevo, lo agregamos
-                items.Add(new ItemCarritoTemporal { LibroId = id, Cantidad = 1 });
-            }
-
-            // 4. ¡EL PASO CLAVE! Guardamos la lista actualizada de vuelta en la Sesión
-            // (Si falta esta línea, el carrito siempre queda igual)
-            HttpContext.Session.SetString("CarritoTemporal", JsonSerializer.Serialize(items));
-
-            // 5. Volvemos al catálogo
-            return RedirectToAction("Index", "Home");
+                return resultado;
         }
+
+        //public IActionResult Agregar(int id)
+        //{
+        //    // 1. Intentamos leer lo que ya hay en la memoria (Sesión)
+        //    var carritoSession = HttpContext.Session.GetString("CarritoTemporal");
+        //    List<ItemCarritoTemporal> items;
+
+        //    // 2. Si está vacío o es nulo, creamos una lista nueva
+        //    if (string.IsNullOrEmpty(carritoSession))
+        //    {
+        //        items = new List<ItemCarritoTemporal>();
+        //    }
+        //    else
+        //    {
+        //        // Si ya había algo, lo convertimos de texto a Lista de C#
+        //        items = JsonSerializer.Deserialize<List<ItemCarritoTemporal>>(carritoSession);
+        //    }
+
+        //    // 3. Buscamos si el libro ya estaba en la lista
+        //    var itemExistente = items.FirstOrDefault(x => x.LibroId == id);
+
+        //    if (itemExistente != null)
+        //    {
+        //        // Si ya existe, solo sumamos cantidad
+        //        itemExistente.Cantidad++;
+        //    }
+        //    else
+        //    {
+        //        // Si es nuevo, lo agregamos
+        //        items.Add(new ItemCarritoTemporal { LibroId = id, Cantidad = 1 });
+        //    }
+
+        //    // 4. ¡EL PASO CLAVE! Guardamos la lista actualizada de vuelta en la Sesión
+        //    // (Si falta esta línea, el carrito siempre queda igual)
+        //    HttpContext.Session.SetString("CarritoTemporal", JsonSerializer.Serialize(items));
+
+        //    // 5. Volvemos al catálogo
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         // ACCIÓN 2: Ver qué hay en el carrito
         public IActionResult Index()

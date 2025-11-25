@@ -60,7 +60,7 @@ namespace Carrito.Controllers
                 return View(vm);
             }
 
-            // Guardar sesión
+            // guarda la sesion en la cookie para que todas las solicitudes las genere en ese usuario
             HttpContext.Session.SetInt32("UsuarioId", usuario.PersonaId);
             Console.WriteLine("SESSION GUARDADA: " + usuario.PersonaId);//test
             return RedirectToAction("Index", "Home");
@@ -101,20 +101,7 @@ namespace Carrito.Controllers
             };
 
             _context.Usuarios.Add(usuario);
-            _context.SaveChanges();
 
-            // Crear carrito asociado
-            var carrito = new Carrito.Models.Carrito
-            {
-                PersonaId = usuario.PersonaId,
-                Activo = true
-            };
-
-            _context.Carritos.Add(carrito);
-            _context.SaveChanges();
-
-            // Guardar FK en Usuario
-            usuario.CarritoId = carrito.CarritoId;
             _context.SaveChanges();
 
             // Iniciar sesión automática
