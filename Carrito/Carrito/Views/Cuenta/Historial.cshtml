@@ -15,7 +15,7 @@ else
         var total = carrito.Libros.Sum(item => item.Cantidad * item.Libro.Price);
 
         <div class="compra">
-            <h3>Compra #@carrito.CarritoId</h3>
+            <h3>Número de pedido #@carrito.CarritoId</h3>
 
             <ul>
                 @foreach (var item in carrito.Libros)
