@@ -115,6 +115,11 @@ namespace Carrito.Controllers
             var usuario = traerUsuario();
             usuario.Carrito.Activo = false;
 
+            foreach(var cl in usuario.Carrito.Libros)
+            {
+                _context.Libros.Find(cl.LibroId).Stock -= cl.Cantidad;
+            }
+
             if(usuario.HistorialCompra == null)
             {
                 usuario.HistorialCompra = new List<Carrito.Models.Carrito>();

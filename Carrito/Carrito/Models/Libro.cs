@@ -21,6 +21,8 @@ public partial class Libro
 
     public int? Price { get; set; }
 
+    public int Stock { get; set; }
+
     public string? CoverUrl { get; set; }
 
     public string SynopsisEs { get; set; } = null!;
