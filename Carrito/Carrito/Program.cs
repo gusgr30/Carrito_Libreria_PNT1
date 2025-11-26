@@ -11,6 +11,10 @@ namespace Carrito
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //para inyectar sesiones en las vistas
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {

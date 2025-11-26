@@ -67,6 +67,13 @@ namespace Carrito.Controllers
                 }
 
                 _context.SaveChanges();
+
+                //calculo la cantidad de libros en el carrito
+                int cantidadLibros = usuario.Carrito.Libros.Sum(li => li.Cantidad);
+
+                //guardo la cantidad en la sesion
+                HttpContext.Session.SetInt32("CantLibros", cantidadLibros);
+
                 resultado = RedirectToAction("Index", "Home");
             } catch (Exception)
             {
@@ -85,8 +92,16 @@ namespace Carrito.Controllers
             try
             {
                 var usuario = traerUsuario();
-                var listaVisual = usuario.Carrito.Libros;
-                resultado = View(listaVisual);
+                if(usuario.Carrito == null)
+                {
+                    resultado = View();
+                }
+                else
+                {
+                    var listaVisual = usuario.Carrito.Libros;
+                    resultado = View(listaVisual);
+
+                }
             } catch (Exception)
             {
                 TempData["Error"] = "Debes iniciar sesión o registrarte para tener un carrito.";
@@ -97,6 +112,16 @@ namespace Carrito.Controllers
         }
         public IActionResult CompraExitosa()
         {
+            var usuario = traerUsuario();
+            usuario.Carrito.Activo = false;
+
+            if(usuario.HistorialCompra == null)
+            {
+                usuario.HistorialCompra = new List<Carrito.Models.Carrito>();
+            }
+            usuario.HistorialCompra.Add(usuario.Carrito);
+            usuario.Carrito = null;
+            _context.SaveChanges();
             return View();
         }
         public IActionResult Eliminar(int id)
@@ -114,6 +139,12 @@ namespace Carrito.Controllers
                 usuario.Carrito.Libros.Remove(libroEliminar);
             }
             _context.SaveChanges();
+
+            //calculo la cantidad de libros en el carrito
+            int cantidadLibros = usuario.Carrito.Libros.Sum(li => li.Cantidad);
+
+            //guardo la cantidad en la sesion
+            HttpContext.Session.SetInt32("CantLibros", cantidadLibros);
 
             return RedirectToAction("Index", "Carrito");
         }

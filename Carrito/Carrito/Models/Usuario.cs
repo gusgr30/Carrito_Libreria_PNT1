@@ -11,7 +11,7 @@ namespace Carrito.Models
 
         public int? CarritoId { get; set; }
 
-        public Carrito Carrito { get; set; }
-        public List<Carrito> HistorialCompra { get; set; }
+        public Carrito? Carrito { get; set; }
+        public List<Carrito>? HistorialCompra { get; set; }
     }
 }

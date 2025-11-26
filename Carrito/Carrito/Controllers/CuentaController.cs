@@ -63,6 +63,21 @@ namespace Carrito.Controllers
             // guarda la sesion en la cookie para que todas las solicitudes las genere en ese usuario
             HttpContext.Session.SetInt32("UsuarioId", usuario.PersonaId);
             Console.WriteLine("SESSION GUARDADA: " + usuario.PersonaId);//test
+
+            var carritoDb = _context.Carritos
+                .Include(c => c.Libros)
+                .FirstOrDefault(c => c.PersonaId == usuario.PersonaId && c.Activo == true);
+
+            if(carritoDb != null)
+            {
+                int cantidad = carritoDb.Libros.Sum(cl => cl.Cantidad);
+                HttpContext.Session.SetInt32("CantLibros", cantidad);
+            }
+            else
+            {
+                HttpContext.Session.SetInt32("CantLibros", 0);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 

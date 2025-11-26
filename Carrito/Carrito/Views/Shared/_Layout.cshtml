@@ -1,4 +1,6 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@using Microsoft.EntityFrameworkCore
 @using Carrito.Data;
 @using Carrito.Models
 
@@ -13,7 +15,6 @@
 
 </head>
 <body>
-    @using Carrito.Models
     <header>
         <div class="logo"><img src="images/logo.png" alt="Logo Librería"> </div>
 
@@ -71,8 +72,21 @@
                 <span class="bienvenida">¡Hola, @usuarioLogueado.Nombre!</span>
                 <a asp-controller="Cuenta" asp-action="Logout">Cerrar sesión</a>
             }
+            <p class="nav-item">
+                <a asp-controller="Carrito" asp-action="Index">
+                    Carrito
+                    @{
+                        //leemos la sesion, traemos la cantidad y ponemos el numero
+                        int cantidad = HttpContextAccessor.HttpContext.Session.GetInt32("CantLibros") ?? 0;
 
-            <a asp-controller="Carrito" asp-action="Index">Carrito</a>
+                        if(cantidad > 0)
+                        {
+                            <span class="cant-libro">@cantidad</span>
+                        }
+                    }
+                </a>
+            
+            </p>
         </div>
 
 
