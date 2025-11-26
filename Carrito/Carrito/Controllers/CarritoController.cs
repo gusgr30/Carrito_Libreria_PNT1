@@ -17,7 +17,7 @@ namespace Carrito.Controllers
         }
 
         //// ACCIÓN 1: Agregar un libro al carrito
-        public IActionResult Agregar(int id)
+        public IActionResult Agregar(int id, string returnUrl)
         {
             //creo el resultado del metodo para manejo de excepciones
             IActionResult resultado;
@@ -74,7 +74,10 @@ namespace Carrito.Controllers
                 //guardo la cantidad en la sesion
                 HttpContext.Session.SetInt32("CantLibros", cantidadLibros);
 
-                resultado = RedirectToAction("Index", "Home");
+                if (!string.IsNullOrEmpty(returnUrl))// nos devuelve a la URL donde estabamos!
+                    resultado = Redirect(returnUrl);
+                else
+                    resultado = RedirectToAction("Index", "Home");
             } catch (Exception)
             {
                 TempData["Error"] = "Debes iniciar sesión o registrarte para agregar libros al carrito.";

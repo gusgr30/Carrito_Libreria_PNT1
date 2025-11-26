@@ -8,7 +8,8 @@
 
 <h2>Resultados de la búsqueda</h2>
 
-<div class="galeria">
+<div class="cards-container">
+
     @foreach (var libro in Model)
     {
         <div class="card">
@@ -23,10 +24,13 @@
             <a asp-controller="Carrito"
                asp-action="Agregar"
                asp-route-id="@libro.Id"
-               asp-route-returnUrl="@Context.Request.GetEncodedUrl()"
+               asp-route-returnUrl="@Context.Request.GetEncodedUrl()" @* envia la pagina actual como parametro*@
                class="btn btn-warning">
                 Comprar
             </a>
+
+
         </div>
     }
+    
 </div>

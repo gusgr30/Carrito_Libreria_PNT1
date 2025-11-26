@@ -24,6 +24,7 @@ align-items: center;
 .logo img {
     height: 80px;
     width: auto;
+    cursor: pointer;
 }
 
 .search-bar {
