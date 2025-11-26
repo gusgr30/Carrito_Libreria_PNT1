@@ -9,6 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <title>@ViewData["Title"]</title>
+    @* Creo una section para que cada vista inserte su estilo de necesitarlo *@
+    @await RenderSectionAsync("Estilos", required: false)
     <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 

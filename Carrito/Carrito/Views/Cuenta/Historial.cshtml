@@ -1,5 +1,8 @@
 ﻿@using Carrito.Models
 @model List<Carrito>
+@section Estilos {
+    <link rel="stylesheet" href="~/css/historial.css" />
+}
 
 <h2>Historial de compras</h2>
 
@@ -17,19 +20,20 @@ else
         <div class="compra">
             <h3>Número de pedido #@carrito.CarritoId</h3>
 
-            <ul>
+            <div class="libroPedido">
                 @foreach (var item in carrito.Libros)
                 {
-                    <li>
-                        <strong>@item.Libro.Title</strong>
-                        — Cantidad: @item.Cantidad
-                        — Precio: $@item.Libro.Price
-                        — Subtotal: $@(item.Cantidad* item.Libro.Price)
-                    </li>
+                    <ul>
+                        <li class="tituloLibro"><strong>@item.Libro.Title</strong> </li>
+                        <li>Cantidad: @item.Cantidad </li>
+                        <li>Precio: $@item.Libro.Price </li>
+                        <li>Subtotal: $@(item.Cantidad* item.Libro.Price) </li>
+                    
+
+                    </ul>
                 }
-            </ul>
+            </div>
             <p><strong>Total de la compra:</strong> $@total</p>
-            <hr />
         </div>
     }
 }

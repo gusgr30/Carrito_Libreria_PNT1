@@ -1,0 +1,83 @@
+﻿body {
+    background-color: #f4f6f9;
+}
+
+/* card de compra */
+.compra {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 25px;
+    margin: 0 auto 30px;
+    border-left: 5px solid #2c3e50;
+    width: 80%;
+}
+
+    .compra:hover {
+        transform: translateY(-3px); /* efecto al pasar el mouse por encima */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .compra h3 {
+        color: #2c3e50;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .compra .libroPedido{
+        display: flex;
+        flex-direction: column;
+    }
+    /* lista de productos */
+    .compra ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px dashed #e0e0e0; /* linea entre items */
+    }
+    .tituloLibro{
+        width: 25%;
+    }
+
+    .compra li {
+        padding: 12px 0;
+        color: #555;
+        font-size: 0.95rem;
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 10px;
+        align-items: center;
+    }
+
+        .compra li:last-child {
+            border-bottom: none;
+        }
+
+        .compra li strong {
+            color: #333;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-right: auto;
+        }
+
+    /* total del pedido */
+    .compra p {
+        text-align: right;
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+        .compra p strong {
+            color: darkgreen; 
+            font-weight: 800;
+            font-size: 1.4rem;
+        }

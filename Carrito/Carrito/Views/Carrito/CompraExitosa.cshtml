@@ -1,13 +1,16 @@
-﻿@{
+﻿@section Estilos{
+    <link rel="stylesheet" href="~/css/carrito.css" />
+}
+@{
     ViewData["Title"] = "¡Gracias!";
 }
 
-<div class="text-center mt-5">
-    <h1 class="text-success display-1">🎉</h1>
-    <h2 class="mb-4">¡Compra realizada con éxito!</h2>
-    <p class="lead">Gracias por comprar en nuestra librería.</p>
+<div class="contenedor-carrito">
+    <h2>🎉 ¡Compra realizada con éxito!</h2>
+    <p class="leyenda">Gracias por comprar en nuestra librería.</p>
 
     <hr />
-
-    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver al inicio</a>
+    <div class="contenedor-btn">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-lg">Volver al inicio</a>
+    </div>
 </div>

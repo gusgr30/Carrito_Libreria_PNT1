@@ -1,0 +1,98 @@
+﻿
+body {
+    background-color: #f4f6f9;
+}
+
+.contenedor-carrito {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* sombra del contenedor */
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+    .contenedor-carrito .leyenda {
+        font-size: 20px;
+    }
+    h2 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0; /* línea separadora */
+}
+/* Estilos de la Tabla */
+.table {
+    margin-bottom: 30px;
+    vertical-align: middle; /* Centra el contenido verticalmente */
+}
+
+    .table thead th {
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        padding: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+    }
+
+
+    .table tbody td {
+        padding: 20px 15px;
+        color: #555;
+        font-size: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f9f9f9; /* efecto al pasar el mouse */
+    }
+
+/* Icono de eliminar */
+.btn-eliminar {
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    .btn-eliminar:hover {
+        transform: scale(1.2); /* crece al pasar el mouse */
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+/* Sección del Total */
+.total-section h3 {
+    font-weight: 700;
+    color: #333;
+}
+
+.text-success {
+    color: forestgreen;
+    font-size: 1.8rem;
+}
+/* Botón de Finalizar */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+
+.contenedor-btn {
+    border-top: 1px solid #eee;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+}

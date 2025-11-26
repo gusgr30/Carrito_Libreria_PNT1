@@ -7,6 +7,10 @@ flex-direction: column;
 font-family: Arial, sans-serif;
 }
 
+body {
+    background-color: #f4f6f9;
+}
+
 header {
 background-color: #ffb303;
 color: white;
@@ -60,7 +64,7 @@ gap: 15px;
     text-decoration: underline;
 }
 
-/* Barra de cat, +vend, nov, etc.. */
+
 .navbar {
 background-color: white;
 border-bottom: 1px solid #ccc;
@@ -72,8 +76,8 @@ list-style: none;
 display: flex;
 gap: 30px;
 align-items: center;
-margin: 0 auto; /* el auto... */
-justify-content: center; /*... y center necesarios para que este centrado */
+margin: 0 auto; 
+justify-content: center;
 padding: 0;
 font-weight: bold;
 }

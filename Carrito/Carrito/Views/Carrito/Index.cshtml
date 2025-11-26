@@ -1,18 +1,21 @@
 ﻿@using Carrito.Models;
 @model List<CarritoLibro>
+@section Estilos{
+    <link rel="stylesheet" href="~/css/carrito.css" />
+}
 
 @{
     ViewData["Title"] = "Tu Carrito";
 }
 
-<div class="container mt-5">
+<div class="contenedor-carrito">
     <h2>🛒 Tu Carrito</h2>
 
     @if (Model == null || Model.Count == 0)
     {
-        <div class="alert alert-warning text-center">
-            <h4>Tu carrito está vacío 😔</h4>
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Ir a comprar</a>
+        <div class="contenedor-carrito carrito-vacio">
+            <h4>Tu carrito está vacío</h4>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-success">Ir a comprar</a>
         </div>
     }
     else
@@ -24,6 +27,7 @@
                     <th>Cant.</th>
                     <th>Precio</th>
                     <th>Subtotal</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +43,8 @@
                         <td>
                             <a asp-controller="Carrito" 
                                 asp-action="Eliminar"
-                                asp-route-id=@item.Libro.Id>
+                                asp-route-id=@item.Libro.Id
+                                class="btn-eliminar">
                                 🗑️
                             </a>
                         </td>
