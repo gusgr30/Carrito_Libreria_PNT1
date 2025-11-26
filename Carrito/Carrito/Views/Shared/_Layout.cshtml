@@ -150,13 +150,20 @@
     </nav>
         @if (TempData["Error"] != null)
         {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger" role="alert">
                 <p>
                     @TempData["Error"]
                 </p>
             </div>
+        }else if(TempData["Success"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>
+                    @TempData["Success"]
+                </p>
+            </div>
         }
-        @RenderBody()
+    @RenderBody()
     @RenderSection("Scripts", required: false)
 
     <footer class="footer">

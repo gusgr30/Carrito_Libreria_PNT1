@@ -41,11 +41,13 @@ namespace Carrito.Controllers
 
                     _context.SaveChanges();
                 }
-                agregarLibroAlCarrito(id, usuario);
+                var libroAgregado = agregarLibroAlCarrito(id, usuario);
 
                 _context.SaveChanges();
 
                 contarLibrosCarrito(usuario);
+
+                TempData["Success"] = $"El libro '{libroAgregado.Title}' fue agregado con éxito";
 
                 if (!string.IsNullOrEmpty(returnUrl))// nos devuelve a la URL donde estabamos!
                     resultado = Redirect(returnUrl);
@@ -67,7 +69,7 @@ namespace Carrito.Controllers
             return resultado;
         }
 
-        private void agregarLibroAlCarrito(int id, Usuario usuario)
+        private Libro agregarLibroAlCarrito(int id, Usuario usuario)
         {
             //busco el libro en el contexto de la BD
             var libroAgregar = _context.Libros.Find(id);
@@ -104,6 +106,8 @@ namespace Carrito.Controllers
 
                 usuario.Carrito.Libros.Add(carritoLibro);
             }
+
+            return libroAgregar;
         }
 
         private bool hayStock(Libro libro, int cantidad)
@@ -154,6 +158,7 @@ namespace Carrito.Controllers
             usuario.Carrito = null;
             _context.SaveChanges();
             setContadorCarrito(0);
+            TempData["Success"] = "Compra finalizada con éxito";
             return View();
         }
         public IActionResult Eliminar(int id)
