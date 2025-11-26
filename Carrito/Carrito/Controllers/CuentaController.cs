@@ -88,7 +88,7 @@ namespace Carrito.Controllers
             if (existe)
             {
                 ModelState.AddModelError("", "El email ya está registrado.");
-                return View(vm);
+               return View(vm);
             }
 
             // Crear usuario
