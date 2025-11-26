@@ -41,30 +41,7 @@ namespace Carrito.Controllers
 
                     _context.SaveChanges();
                 }
-                //Pregunto si el libro agregado esta en el carrito
-                var libroExistente = usuario.Carrito.Libros
-                    .FirstOrDefault(x => x.LibroId == id);
-
-                //Si existe en el carrito, se aumenta la cantidad -- libroExistente refiere a CarritoLibro
-                //Si no existe se crea un nuevo CarritoLibro y se lo agrega a Libros (refiere a una List<CarritoLibro>)
-                if (libroExistente != null)
-                {
-                    libroExistente.Cantidad++;
-                }
-                else
-                {
-                    var libroAgregar = _context.Libros.Find(id);
-                    var carritoLibro = new CarritoLibro
-                    {
-                        Carrito = usuario.Carrito,
-                        CarritoId = usuario.Carrito.CarritoId,
-                        Libro = libroAgregar,
-                        LibroId = libroAgregar.Id,
-                        Cantidad = 1
-                    };
-
-                    usuario.Carrito.Libros.Add(carritoLibro);
-                }
+                agregarLibroAlCarrito(id, usuario);
 
                 _context.SaveChanges();
 
@@ -74,14 +51,64 @@ namespace Carrito.Controllers
                     resultado = Redirect(returnUrl);
                 else
                     resultado = RedirectToAction("Index", "Home");
-            } catch (Exception)
+            }
+            catch (NullReferenceException)
             {
                 TempData["Error"] = "Debes iniciar sesión o registrarte para agregar libros al carrito.";
                 resultado = RedirectToAction("Login", "Cuenta");
             }
+            catch (InvalidOperationException ex)
+            {
+                TempData["Error"] = ex.Message;
+                resultado = Redirect(returnUrl);
+            }
 
 
             return resultado;
+        }
+
+        private void agregarLibroAlCarrito(int id, Usuario usuario)
+        {
+            //busco el libro en el contexto de la BD
+            var libroAgregar = _context.Libros.Find(id);
+
+            //Pregunto si el libro agregado esta en el carrito del usuario recibido por parametro
+            var carritoLibroExistente = usuario.Carrito.Libros
+                .FirstOrDefault(x => x.LibroId == id);
+
+            //si el carritoLibro existe, obtengo la cantidad actual en el carrito, sino 0
+            var cantidadCarritoExistente = carritoLibroExistente != null ? carritoLibroExistente.Cantidad : 0;
+
+            //evaluo stock y en caso de no haber lanza excepcion. Se pasa el libro y la cantidad que se quiere agregar (cantidad existente + 1)
+            if (!hayStock(libroAgregar, cantidadCarritoExistente + 1))
+            {
+                throw new InvalidOperationException($"Lo sentimos, el libro '{libroAgregar.Title}' está agotado");
+            }
+
+            //Si existe en el carrito, se aumenta la propiedad cantidad -- carritoLibroExistente refiere a CarritoLibro
+            //Si no existe se crea un nuevo CarritoLibro y se lo agrega a Libros (refiere a una List<CarritoLibro>)
+            if (carritoLibroExistente != null)
+            {
+                carritoLibroExistente.Cantidad++;
+            }
+            else
+            {
+                var carritoLibro = new CarritoLibro
+                {
+                    Carrito = usuario.Carrito,
+                    CarritoId = usuario.Carrito.CarritoId,
+                    Libro = libroAgregar,
+                    LibroId = libroAgregar.Id,
+                    Cantidad = 1
+                };
+
+                usuario.Carrito.Libros.Add(carritoLibro);
+            }
+        }
+
+        private bool hayStock(Libro libro, int cantidad)
+        {
+            return libro.Stock >= cantidad;
         }
 
         // Ver qué hay en el carrito
@@ -101,7 +128,7 @@ namespace Carrito.Controllers
                     resultado = View(listaVisual);
 
                 }
-            } catch (Exception)
+            } catch (NullReferenceException)
             {
                 TempData["Error"] = "Debes iniciar sesión o registrarte para tener un carrito.";
                 resultado = RedirectToAction("Login", "Cuenta");
@@ -114,12 +141,12 @@ namespace Carrito.Controllers
             var usuario = traerUsuario();
             usuario.Carrito.Activo = false;
 
-            foreach(var cl in usuario.Carrito.Libros)
+            foreach (var cl in usuario.Carrito.Libros)
             {
                 _context.Libros.Find(cl.LibroId).Stock -= cl.Cantidad;
             }
 
-            if(usuario.HistorialCompra == null)
+            if (usuario.HistorialCompra == null)
             {
                 usuario.HistorialCompra = new List<Carrito.Models.Carrito>();
             }

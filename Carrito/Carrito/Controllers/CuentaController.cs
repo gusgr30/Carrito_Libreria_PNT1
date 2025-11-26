@@ -135,21 +135,12 @@ namespace Carrito.Controllers
             if (usuarioId == null)
                 return RedirectToAction("Login", "Cuenta");
 
-            // Traer usuario con sus carritos finalizados
-            var usuario = _context.Usuarios
-                .Include(u => u.HistorialCompra)
-                    .ThenInclude(c => c.Libros)
-                        .ThenInclude(cl => cl.Libro)
-                .FirstOrDefault(u => u.PersonaId == usuarioId);
-
-            if (usuario == null)
-                return RedirectToAction("Login", "Cuenta");
-
-            // Filtrar compras finalizadas (Activo = false)
-            var historial = usuario.HistorialCompra?
-                .Where(c => c.Activo == false)
-                .ToList()
-                ?? new List<Carrito.Models.Carrito>();
+            // Traer solo los carritos finalizados del usuario
+            var historial = _context.Carritos
+                .Where(c => c.PersonaId == usuarioId && c.Activo == false)
+                .Include(c => c.Libros)
+                    .ThenInclude(cl => cl.Libro)
+                .ToList();
 
             return View(historial);
         }
