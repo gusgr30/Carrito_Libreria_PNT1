@@ -23,33 +23,19 @@
         </div>
 
 
-        @* BUSCADOR PRINCIPAL CON AUTOCOMPLETADO *@
-        @{
-            using (var context = new AppDbContext())
-            {
-                var titulos = context.Libros
-                .OrderBy(l => l.Title)
-                .Select(l => l.Title)
-                .ToList();
+        @* BUSCADOR PRINCIPAL *@
+        <form asp-controller="Libro"
+              asp-action="Buscar"
+              method="get"
+              class="search-bar">
 
-                <form asp-controller="Libro"
-                      asp-action="Buscar"
-                      method="get"
-                      class="search-bar">
-                    <input type="text"
-                           name="titulo"
-                           list="listaLibrosHeader"
-                           placeholder="Buscar libros, autores..." />
+            <input type="text"
+                   name="titulo"
+                   placeholder="Buscar libros o autores..." />
 
-                    <datalist id="listaLibrosHeader">
-                        @foreach (var t in titulos)
-                        {
-                            <option value="@t"></option>
-                        }
-                    </datalist>
-                </form>
-            }
-        }
+        </form>
+
+
                      @*SECCIÓN USUARIO LOGUEADO*@
         @{
             int? usuarioId = Context.Session.GetInt32("UsuarioId");

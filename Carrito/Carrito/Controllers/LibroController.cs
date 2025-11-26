@@ -34,11 +34,17 @@ namespace Carrito.Controllers
 
             if (!string.IsNullOrWhiteSpace(titulo))
             {
-                query = query.Where(l => l.Title.Contains(titulo));
+                titulo = titulo.ToLower();
+
+                query = query.Where(l =>
+                    l.Title.ToLower().Contains(titulo) ||
+                    l.Author.FullName.ToLower().Contains(titulo)
+                );
             }
 
             return View("Buscar", query.ToList());
         }
+
 
         public IActionResult PorGenero(int id)
         {
