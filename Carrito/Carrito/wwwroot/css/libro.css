@@ -1,0 +1,44 @@
+.container-top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8rem;
+    margin: 20px;
+}
+.container-top img{
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.ruta{
+    font-size: 12px;
+    color: rgb(129, 129, 131);
+}
+.container-top-text button {
+  background-color: #ffb303;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.container-bottom{
+    border-top: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    margin: 20px 15rem;
+}
+.container-bottom p{
+    margin: 8px 0;
+}
+.container-bottom h4{
+    margin: 16px 0 8px 0;
+}
+.container-bottom .sinopsis{
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+}
