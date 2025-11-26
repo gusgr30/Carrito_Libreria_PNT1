@@ -12,18 +12,18 @@ namespace Carrito.Controllers
         {
             _context = context;
         }
-
+        //DETALLE DE UN LIBRO
         public IActionResult Index()
         {
-            var lista = _context.Libros
+            var Lista = _context.Libros
                 .Include(l => l.Author)
                 .Include(l => l.Genre)
                 .Include(l => l.Publisher)
                 .ToList();
 
-            return View(lista);
+            return View(Lista);
         }
-
+        //BUSCAR LIBROS (LISTADO)
         public IActionResult Buscar(string titulo)
         {
             var query = _context.Libros
