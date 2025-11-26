@@ -13,6 +13,9 @@
 <form class ="form-login" asp-action="Registro" method="post" class="mt-4">
     <h2>Crear cuenta</h2>
 
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @* Muestra los errores generales del formulario que están cargados en ModelState *@
+
     <div class="form-body">
         <div class="campo">
             <label class="form-label">Nombre</label>
