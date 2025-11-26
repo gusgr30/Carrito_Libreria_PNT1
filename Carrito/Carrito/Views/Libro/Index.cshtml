@@ -4,22 +4,38 @@
 }
 
     <div class="container-top">
-        <img src="@Model.CoverUrl" alt="El Mesias de Dune">
+        <img src="@Model.CoverUrl" alt="@Model.Title">
         <div class="container-top-text">
-            <p class="ruta">INICIO > LIBROS > CIENCIA FICCIÓN > EL MESIAS DE DUNE</p>
-            <h1>El Mesias de Dune</h1>
-            <h3>Frank Herbert</h3>
-            <p>$25.000.-</p>
-            <button>Comprar</button>
+        <p class="ruta">INICIO > LIBROS > @Model.Genre.Name > @Model.Title</p>
+        <h1>@Model.Title</h1>
+            <h3>@Model.Author.FullName</h3>
+            <p>$@Model.Price</p>
+        @{
+            if (Model.Stock > 0)
+            {
+                <a asp-controller="Carrito"
+                   asp-action="Agregar"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-warning">
+                    Comprar
+                </a>
+            }
+            else
+            {
+                <a class="btn btn-agotado">
+                    Sin Stock
+                </a>
+            }
+        }
         </div>
     </div>
     <div class="container-bottom">
         <h4>Descripcion</h4>
         <p><strong>Formato: </strong>Libro Físico</p>
-        <p><strong>Editorial: </strong>Debolsillo</p>
+        <p><strong>Editorial: </strong>@Model.Publisher.Name</p>
         <p><strong>Idioma: </strong>Español</p>
-        <p><strong>Página: </strong>304</p>
+        <p><strong>Página: </strong>@Model.Pages</p>
 
         <h4>Sinopsis</h4>
-        <p class="sinopsis">Arrakis, también llamado Dune: un mundo desierto en pos del sueño de convertirse en un paraíso, cuna de mil guerras que se han extendido por todo el universo y de un anhelo mesiánico que intenta alcanzar el sueño más antiguo de la humanidad... Paul Atreides: un personaje mítico, perturbado por la cercana presencia de una sombra dominante: su hermana Alia. Y frente a ellos, los grandes intereses económicos, políticos y religiosos que sacuden los espacios interestelares: la CHOAM, la Cofradía espacial, el Landsraad, la Bene Gesserit... Todo ello, y mucho más, conforma esta segunda entrega de «Dune»: un fresco impresionante y una obra cumbre de la imaginación.</p>
+        <p class="sinopsis">@Model.SynopsisEs</p>
     </div>
