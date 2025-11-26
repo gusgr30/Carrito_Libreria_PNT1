@@ -11,6 +11,9 @@ else
 {
     foreach (var carrito in Model)
     {
+        // Calcular total de la compra
+        var total = carrito.Libros.Sum(item => item.Cantidad * item.Libro.Price);
+
         <div class="compra">
             <h3>Compra #@carrito.CarritoId</h3>
 
@@ -21,10 +24,11 @@ else
                         <strong>@item.Libro.Title</strong>
                         — Cantidad: @item.Cantidad
                         — Precio: $@item.Libro.Price
+                        — Subtotal: $@(item.Cantidad* item.Libro.Price)
                     </li>
                 }
             </ul>
-
+            <p><strong>Total de la compra:</strong> $@total</p>
             <hr />
         </div>
     }
