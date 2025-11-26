@@ -68,8 +68,19 @@
             }
             else
             {
-                <span class="bienvenida">¡Hola, @usuarioLogueado.Nombre!</span>
-                <a asp-controller="Cuenta" asp-action="Logout">Cerrar sesión</a>
+                <div class="dropdown user-menu" id="menuUsuario">
+                    <span class="bienvenida">¡Hola, @usuarioLogueado.Nombre! ▾</span>
+
+                    <div class="dropdown-content">
+                        <ul>
+                            <li><a asp-controller="Cuenta" asp-action="Historial">Historial de compras</a></li>
+                            <li><a asp-controller="Cuenta" asp-action="Logout">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
             }
 
             <a asp-controller="Carrito" asp-action="Index">Carrito</a>
