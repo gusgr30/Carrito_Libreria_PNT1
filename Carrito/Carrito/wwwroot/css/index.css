@@ -42,6 +42,10 @@
     border-radius: 4px;
     cursor: pointer;
 }
+.galeria .card .btn-agotado{
+    background-color: grey;
+    cursor: not-allowed;
+}
 main .pagination-lg{
     padding: 1rem;
     display: flex;
