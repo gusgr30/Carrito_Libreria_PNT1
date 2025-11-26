@@ -68,11 +68,7 @@ namespace Carrito.Controllers
 
                 _context.SaveChanges();
 
-                //calculo la cantidad de libros en el carrito
-                int cantidadLibros = usuario.Carrito.Libros.Sum(li => li.Cantidad);
-
-                //guardo la cantidad en la sesion
-                HttpContext.Session.SetInt32("CantLibros", cantidadLibros);
+                contarLibrosCarrito(usuario);
 
                 if (!string.IsNullOrEmpty(returnUrl))// nos devuelve a la URL donde estabamos!
                     resultado = Redirect(returnUrl);
@@ -130,6 +126,7 @@ namespace Carrito.Controllers
             usuario.HistorialCompra.Add(usuario.Carrito);
             usuario.Carrito = null;
             _context.SaveChanges();
+            setContadorCarrito(0);
             return View();
         }
         public IActionResult Eliminar(int id)
@@ -138,7 +135,7 @@ namespace Carrito.Controllers
             var libroEliminar = usuario.Carrito.Libros.
                 FirstOrDefault(x => x.LibroId == id);
 
-            if(libroEliminar.Cantidad > 1)
+            if (libroEliminar.Cantidad > 1)
             {
                 libroEliminar.Cantidad--;
             }
@@ -147,14 +144,20 @@ namespace Carrito.Controllers
                 usuario.Carrito.Libros.Remove(libroEliminar);
             }
             _context.SaveChanges();
-
-            //calculo la cantidad de libros en el carrito
-            int cantidadLibros = usuario.Carrito.Libros.Sum(li => li.Cantidad);
-
-            //guardo la cantidad en la sesion
-            HttpContext.Session.SetInt32("CantLibros", cantidadLibros);
+            contarLibrosCarrito(usuario);
 
             return RedirectToAction("Index", "Carrito");
+        }
+        private void contarLibrosCarrito(Usuario usuario)
+        {
+            //calculo la cantidad de libros en el carrito
+            int cantidadLibros = usuario.Carrito.Libros.Sum(li => li.Cantidad);
+            setContadorCarrito(cantidadLibros);
+        }
+        private void setContadorCarrito(int cantidadLibros)
+        {
+            //guardo la cantidad en la sesion
+            HttpContext.Session.SetInt32("CantLibros", cantidadLibros);
         }
 
         private Usuario traerUsuario()
@@ -174,10 +177,5 @@ namespace Carrito.Controllers
 
             return usuario;
         }
-    }
-    public class ItemCarritoTemporal
-    {
-        public int LibroId { get; set; }
-        public int Cantidad { get; set; }
     }
 }
