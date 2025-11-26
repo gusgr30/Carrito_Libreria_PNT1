@@ -131,7 +131,7 @@ padding: 0;
 
 /* ================================
    MENÚ DESPLEGABLE DEL USUARIO
-   (se abre al hacer clic)
+   (se abre al pasar el mouse)
 ================================ */
 
 .user-menu {
@@ -147,6 +147,7 @@ padding: 0;
         font-weight: bold;
     }
 
+    /* oculto inicialmente */
     .user-menu .dropdown-content {
         position: absolute;
         top: 100%;
@@ -163,7 +164,8 @@ padding: 0;
         z-index: 999;
     }
 
-    .user-menu.open .dropdown-content {
+    /* SE ABRE AL PASAR EL MOUSE */
+    .user-menu:hover .dropdown-content {
         opacity: 1;
         pointer-events: auto;
         transform: translateY(0);
@@ -196,6 +198,7 @@ padding: 0;
 /* ================================
    FIN DEL MENÚ DE USUARIO
 ================================ */
+
 
 .footer {
 background: #eee;
