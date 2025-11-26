@@ -25,33 +25,19 @@
         </div>
 
 
-        @* BUSCADOR PRINCIPAL CON AUTOCOMPLETADO *@
-        @{
-            using (var context = new AppDbContext())
-            {
-                var titulos = context.Libros
-                .OrderBy(l => l.Title)
-                .Select(l => l.Title)
-                .ToList();
+        @* BUSCADOR PRINCIPAL *@
+        <form asp-controller="Libro"
+              asp-action="Buscar"
+              method="get"
+              class="search-bar">
 
-                <form asp-controller="Libro"
-                      asp-action="Buscar"
-                      method="get"
-                      class="search-bar">
-                    <input type="text"
-                           name="titulo"
-                           list="listaLibrosHeader"
-                           placeholder="Buscar libros, autores..." />
+            <input type="text"
+                   name="titulo"
+                   placeholder="Buscar libros o autores..." />
 
-                    <datalist id="listaLibrosHeader">
-                        @foreach (var t in titulos)
-                        {
-                            <option value="@t"></option>
-                        }
-                    </datalist>
-                </form>
-            }
-        }
+        </form>
+
+
                      @*SECCIÓN USUARIO LOGUEADO*@
         @{
             int? usuarioId = Context.Session.GetInt32("UsuarioId");
@@ -195,10 +181,10 @@
             <div class="footer-column">
                 <h4>REDES SOCIALES</h4>
                 <div class="social-icons">
-                    <a href="#"><img src="icons/instagram.svg" alt="Instagram" /></a>
-                    <a href="#"><img src="icons/twitter.svg" alt="Twitter" /></a>
-                    <a href="#"><img src="icons/facebook.svg" alt="Facebook" /></a>
-                    <a href="#"><img src="icons/linkedin.svg" alt="LinkedIn" /></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" /></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="Twitter" /></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" /></a>
+                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" /></a>
                 </div>
             </div>
         </div>
