@@ -12,18 +12,22 @@
     <div class="galeria">
         @foreach (var libro in Model)
         {
+            
             <div class="card">
-                <img src="@libro.CoverUrl" alt="@libro.Title">
-                <h2>@libro.Title</h2>
-                <p>@libro.Author.FullName</p>
-                <p>$@libro.Price.-</p>
+                <a asp-controller="Libro"
+                    asp-action="Index"
+                    asp-route-id="@libro.Id">
+                    <img src="@libro.CoverUrl" alt="@libro.Title">
+                    <h2>@libro.Title</h2>
+                    <p>@libro.Author.FullName</p>
+                    <p>$@libro.Price.-</p>
+                </a>
                 @{
                     if(libro.Stock > 0)
                     {
                         <a asp-controller="Carrito"
                            asp-action="Agregar"
                            asp-route-id="@libro.Id"
-                           asp-route-returnUrl="@Context.Request.GetEncodedUrl()" @* envia la pagina actual como parametro*@
                            class="btn btn-warning">
                             Comprar
                         </a>

@@ -34,20 +34,21 @@
     font-size: 1.2rem;
 }
 
-        .galeria .card a {
-            padding: 10px 20px;
-            background-color: #ffb303;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-                .galeria .card .btn-agotado{
-                    background-color: grey;
-                    cursor: not-allowed;
-                }
+.btn-warning {
+    padding: 10px 20px;
+    background-color: #ffb303;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-agotado{
+    background-color: grey;
+    cursor: not-allowed;
+}
 main .pagination-lg{
     padding: 1rem;
     display: flex;
