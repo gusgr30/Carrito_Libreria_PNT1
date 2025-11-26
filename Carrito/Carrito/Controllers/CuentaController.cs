@@ -127,6 +127,36 @@ namespace Carrito.Controllers
         }
 
         // ==============================
+        // HISTORIAL DE COMPRAS
+        // ==============================
+        public IActionResult Historial()
+        {
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            if (usuarioId == null)
+                return RedirectToAction("Login", "Cuenta");
+
+            // Traer usuario con sus carritos finalizados
+            var usuario = _context.Usuarios
+                .Include(u => u.HistorialCompra)
+                    .ThenInclude(c => c.Libros)
+                        .ThenInclude(cl => cl.Libro)
+                .FirstOrDefault(u => u.PersonaId == usuarioId);
+
+            if (usuario == null)
+                return RedirectToAction("Login", "Cuenta");
+
+            // Filtrar compras finalizadas (Activo = false)
+            var historial = usuario.HistorialCompra?
+                .Where(c => c.Activo == false)
+                .ToList()
+                ?? new List<Carrito.Models.Carrito>();
+
+            return View(historial);
+        }
+
+
+
+        // ==============================
         // SHA256
         // ==============================
         private string Hash(string texto)

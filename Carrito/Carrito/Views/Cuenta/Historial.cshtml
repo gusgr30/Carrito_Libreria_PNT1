@@ -1,0 +1,31 @@
+﻿@using Carrito.Models
+@model List<Carrito>
+
+<h2>Historial de compras</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>No tenés compras realizadas.</p>
+}
+else
+{
+    foreach (var carrito in Model)
+    {
+        <div class="compra">
+            <h3>Compra #@carrito.CarritoId</h3>
+
+            <ul>
+                @foreach (var item in carrito.Libros)
+                {
+                    <li>
+                        <strong>@item.Libro.Title</strong>
+                        — Cantidad: @item.Cantidad
+                        — Precio: $@item.Libro.Price
+                    </li>
+                }
+            </ul>
+
+            <hr />
+        </div>
+    }
+}
