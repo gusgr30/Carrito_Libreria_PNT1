@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Confirmar compra";
+
+    // Leo el método que vino por parámetro (desde asp-route-metodo)
+    var metodo = (string)ViewBag.Metodo ?? (string)Context.Request.Query["metodo"];
+
+    // Leo el total que viene por TempData (lo guardaste en el carrito)
+    var total = TempData["TotalCompra"];
+
+    string nombreMetodo = "Tarjeta de crédito / débito";
+
+    if (!string.IsNullOrEmpty(metodo))
+    {
+        switch (metodo.ToLower())
+        {
+            case "mercadopago":
+                nombreMetodo = "MercadoPago";
+                break;
+            case "efectivo":
+                nombreMetodo = "Efectivo";
+                break;
+            case "tarjeta":
+            default:
+                nombreMetodo = "Tarjeta de crédito / débito";
+                break;
+        }
+    }
+}
+
+@section Estilos {
+    <link rel="stylesheet" href="~/css/pago.css" />
+}
+
+<div class="pago-container">
+
+    <div class="ticket-compra">
+        <h2>Confirmá tu compra</h2>
+
+        <p>Método elegido:</p>
+        <h3 class="metodo-titulo">@nombreMetodo</h3>
+
+        <p>Total de la compra:</p>
+        <p class="monto-total">$@total</p>
+
+        <p class="texto-gracias">
+            Si los datos son correctos, confirmá para finalizar la compra.
+        </p>
+
+        <div style="margin-top: 20px;">
+            <a asp-controller="Carrito"
+               asp-action="CompraExitosa"
+               class="btn btn-pago">
+                ✅ Confirmar compra
+            </a>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <a asp-controller="Pago"
+               asp-action="Metodo"
+               class="btn btn-secondary">
+                ⬅ Volver a métodos de pago
+            </a>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,109 @@
+﻿/* CONTENEDOR GENERAL */
+.pago-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* TÍTULO */
+.titulo-pago {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* TOTAL */
+.total-pago {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+}
+
+.monto-total {
+    color: #ff8c42;
+    font-weight: 800;
+}
+
+/* TARJETAS DE OPCIONES */
+.opcion-pago {
+    border: 2px solid #ff8c42; /* borde color naranja */
+    border-radius: 16px;
+    background: #ffffff;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    /* ANIMACIÓN AL PASAR EL MOUSE */
+    .opcion-pago:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+/* LOGOS PEQUEÑOS */
+.logo-pago {
+    width: 70px; /* tamaño del logo */
+    margin: 5px;
+    display: inline-block;
+    object-fit: contain;
+}
+
+/* LOGO GRANDE DE MERCADOPAGO */
+.mp-logo {
+    width: 130px;
+}
+
+/* TITULO DE CADA MÉTODO */
+.metodo-titulo {
+    margin-top: 10px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* DESCRIPCION DE CADA MÉTODO */
+.metodo-descripcion {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* BOTÓN */
+.btn-pago {
+    background-color: #ff7a1a; /* naranja */
+    color: white !important;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    transition: 0.2s;
+}
+
+    .btn-pago:hover {
+        background-color: #e0680d !important;
+    }
+
+/* TICKET DE COMPRA */
+.ticket-compra {
+    max-width: 450px;
+    background: #fff9e6;
+    padding: 25px;
+    margin: auto;
+    border-radius: 14px;
+    border: 2px dashed #ff8c42;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+    .ticket-compra h2 {
+        margin-bottom: 15px;
+    }
+
+    .ticket-compra .monto-total {
+        font-size: 1.5rem;
+    }
+
+    .ticket-compra .texto-gracias {
+        margin-top: 10px;
+        font-style: italic;
+    }

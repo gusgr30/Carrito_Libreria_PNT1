@@ -56,7 +56,9 @@
         <div class="d-flex justify-content-between align-items-center mt-4">
             <h3>Total: <span class="text-success">$@Model.Sum(x => x.Libro.Price * x.Cantidad)</span></h3>
 
-            <a asp-action="CompraExitosa" class="btn btn-success btn-lg">✅ Finalizar Compra</a>
+            <a asp-controller="Pago" asp-action="Metodo" class="btn btn-success btn-lg"> 
+                ✅ Finalizar Compra
+            </a>
         </div>
     }
 </div>

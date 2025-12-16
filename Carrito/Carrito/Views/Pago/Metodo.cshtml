@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Elegí tu método de pago";
+
+    // 👀 Usamos Peek para NO gastar TempData y que llegue también a Confirmar
+    var total = TempData.Peek("TotalCompra");
+}
+
+@section Estilos {
+    <link rel="stylesheet" href="~/css/pago.css" />
+}
+
+<div class="pago-container">
+
+    <h1 class="titulo-pago">Elegí tu método de pago</h1>
+
+    <div class="total-pago">
+        Total a pagar:
+        <span class="monto-total">
+            $@total
+        </span>
+    </div>
+
+    <!-- TARJETA DE CRÉDITO / DÉBITO -->
+    <div class="opcion-pago">
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                 class="logo-pago" alt="Visa" />
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
+                 class="logo-pago" alt="Mastercard" />
+
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nuevo%20logo%20cabal.gif"
+                 class="logo-pago" alt="Cabal" />
+        </div>
+
+        <h3 class="metodo-titulo">Tarjeta de crédito / débito</h3>
+        <p class="metodo-descripcion">Visa – Mastercard – Cabal</p>
+
+        <a asp-controller="Pago"
+           asp-action="Confirmar"
+           asp-route-metodo="tarjeta"
+           class="btn btn-pago">
+            Elegir tarjeta
+        </a>
+    </div>
+
+    <!-- MERCADO PAGO -->
+    <div class="opcion-pago">
+        <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mercadopago.svg"
+             class="logo-pago"
+             alt="MercadoPago" />
+
+        <h3 class="metodo-titulo">MercadoPago</h3>
+        <p class="metodo-descripcion">Pagá con tu cuenta MP</p>
+
+        <a asp-controller="Pago"
+           asp-action="Confirmar"
+           asp-route-metodo="mercadopago"
+           class="btn btn-pago">
+            Elegir MercadoPago
+        </a>
+    </div>
+
+    
+    <!-- EFECTIVO -->
+    <div class="opcion-pago">
+        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png"
+             class="logo-pago"
+             alt="Efectivo" />
+
+        <h3 class="metodo-titulo">Efectivo</h3>
+        <p class="metodo-descripcion">Pagás al retirar en sucursal</p>
+
+        <a asp-controller="Pago"
+           asp-action="Confirmar"
+           asp-route-metodo="efectivo"
+           class="btn btn-pago">
+            Elegir efectivo
+        </a>
+    </div>
+
